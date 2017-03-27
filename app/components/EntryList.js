@@ -22,3 +22,5 @@ export class EntryList extends React.Component {
 			)
 	}
 }
+
+// Add PropTypes

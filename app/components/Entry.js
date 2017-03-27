@@ -11,3 +11,5 @@ export class Entry extends React.Component {
 			)
 	}
 }
+
+// Add PropTypes

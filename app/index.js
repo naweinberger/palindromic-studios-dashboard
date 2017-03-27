@@ -16,11 +16,14 @@ const _deleteEntry = (id) => {
 // store.dispatch(addEntry({name: 'Chili', unit: 'g'}, 200))
 // store.dispatch(addEntry({name: 'Yogurt', unit: 'g'}, 125))
 // store.dispatch(addEntry({name: 'Peanuts', unit: 'g'}, 30))
-let unsubscribe = store.subscribe(() => console.log(store.getState().entries))
+let unsubscribe = store.subscribe(() => console.log(store.getState()))
 
 ReactDOM.render(
 	<Provider store={store}>
-		<EntryContainer />
+		<div>
+			<EntryContainer />
+			<button onClick={() => store.dispatch(addEntry({name: 'Chili', unit: 'g'}, 220))}>Add entry</button>
+		</div>
 	</Provider>,
 	document.getElementById('app')
 	);
