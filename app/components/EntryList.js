@@ -1,0 +1,24 @@
+import React from 'react';
+import { Entry } from './Entry'
+
+export class EntryList extends React.Component {
+	render() {
+		// console.log(this.props.entries.entries)
+		let entries = this.props.entries.map((entry) => (
+			<Entry
+				key={entry.id}
+				food={entry.food}
+				amount={entry.amount}
+				onEntryClick={() => this.props.onEntryClick(entry.id)}
+			/>
+			)
+		);
+		return (
+			<div>
+				<ul>
+					{entries}
+				</ul>
+			</div>
+			)
+	}
+}
