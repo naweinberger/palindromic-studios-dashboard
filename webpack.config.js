@@ -1,25 +1,11 @@
-var path = require('path');
+var WebpackStripLoader = require('strip-loader');
+var devConfig = require('./webpack.config.dev.js');
 
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
-	template: path.resolve(__dirname, 'app/index.html'),
-	filename: 'index.html',
-	inject: 'body'
-});
-
-
-module.exports = {
-	entry: [
-		'./app/index.js'
-	],
-	module: {
-		loaders: [
-			{test: /\.js$/, include: path.resolve(__dirname, 'app'), loader: 'babel-loader'},
-		]
-	},
-	output: {
-		filename: 'bundle.js',
-		path: path.resolve(__dirname, 'dist')
-	},
-	plugins: [HtmlWebpackPluginConfig]
+var stripLoader = {
+	test: [/\.js$/],
+	exclude: /node_modules/,
+	loader: WebpackStripLoader.loader('console.log')
 }
+
+devConfig.module.loaders.push(stripLoader);
+module.exports = devConfig

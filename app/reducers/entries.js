@@ -1,4 +1,4 @@
-import { ADD_ENTRY, DELETE_ENTRY, UPDATE_ENTRY, GET_ENTRIES } from '../actions'
+import { ADD_ENTRY, DELETE_ENTRY, UPDATE_ENTRY } from '../actions'
 
 const initialState = [
 		{id: -1, food: {name: 'Chili', unit: 'g'}, amount: 200},
@@ -12,8 +12,6 @@ const entries = (state = initialState, action) => {
 			return [...state, {id: action.id, food: action.food, amount: action.amount}]
 		case DELETE_ENTRY:
 			return state.filter((entry) => entry.id !== action.id)
-		case GET_ENTRIES:
-			return state
 		default:
 			return state
 	}
