@@ -1,3 +1,4 @@
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { addEntry, deleteEntry } from '../actions'
 import { EntryList } from '../components/EntryList'
@@ -18,9 +19,16 @@ const mapDispatchToProps = (dispatch) => {
 	}
 }
 
-const EntryContainer = connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(EntryList)
+class EntryContainer extends Component {
+	componentDidMount() {
 
-export default EntryContainer
+	}
+
+	render() {
+		return (
+			<EntryList {...this.props} />
+			)
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EntryContainer)

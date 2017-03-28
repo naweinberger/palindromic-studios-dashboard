@@ -23,4 +23,7 @@ export class EntryList extends React.Component {
 	}
 }
 
-// Add PropTypes
+EntryList.propTypes = {
+	entries: React.PropTypes.array,
+	onEntryClick: React.PropTypes.func
+}
