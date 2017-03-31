@@ -7,12 +7,15 @@ import { EntryList } from '../components/EntryList'
 
 const mapStateToProps = (state) => {
 	return {
-		entries: state.entries
+		entries: state.entries.items
 	}
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return {
+		fetchEntries: () => {
+			
+		},
 		onEntryClick: (id) => {
 			dispatch(deleteEntry(id))
 		}
@@ -21,6 +24,10 @@ const mapDispatchToProps = (dispatch) => {
 
 class EntryContainer extends Component {
 	componentDidMount() {
+		this.props.fetchEntries();
+	}
+
+	componentDidUpdate(lastProps) {
 
 	}
 
