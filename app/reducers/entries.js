@@ -4,11 +4,7 @@ import axios from 'axios'
 const initialState = {
 	isFetching: false,
 	didInvalidate: false,
-	items: [
-		{id: -1, food: {name: 'Chili', unit: 'g'}, amount: 200},
-		{id: -2, food: {name: 'Yogurt', unit: 'g'}, amount: 150},
-		{id: -3, food: {name: 'Peanuts', unit: 'g'}, amount: 30}
-	]
+	items: []
 }
 
 const entries = (state = initialState, action) => {

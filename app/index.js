@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
+import thunkMiddleware from 'redux-thunk'
 import logger from 'redux-logger'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import healthApp from './reducers'
@@ -10,7 +11,10 @@ import { addEntry, deleteEntry } from './actions'
 
 let store = createStore(
 	healthApp,
-	applyMiddleware(logger)
+	applyMiddleware(
+		logger,
+		thunkMiddleware
+		)
 	)
 
 let unsubscribe = store.subscribe(() => console.log(store.getState()))

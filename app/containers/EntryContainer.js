@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { addEntry, deleteEntry } from '../actions'
+import { addEntry, deleteEntry, fetchEntries } from '../actions'
 import { EntryList } from '../components/EntryList'
 
 // Perhaps add getEntries = (date/criteria)
@@ -14,7 +14,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		fetchEntries: () => {
-			
+			dispatch(fetchEntries())
 		},
 		onEntryClick: (id) => {
 			dispatch(deleteEntry(id))

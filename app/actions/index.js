@@ -44,18 +44,18 @@ export const receiveEntries = (json) => {
 export function fetchEntries() {
 	return function (dispatch) {
 		dispatch(requestEntries)
-		return axios.get('http://api.palindromicstudios.com/health/entry', {
+		return axios.get('http://api.palindromicstudios.com/health/entry/', {
 			auth: {
-				user: 'natan',
+				username: 'natan',
 				password: 'phillies'
 			}
 		})
 		.then(
-			response => response.json(),
+			response => response,
 			error => console.log(error)
 			)
 		.then(json =>
-			dispatch(receivePosts(json))
+			dispatch(receiveEntries(json))
 			)
 		}
 }
