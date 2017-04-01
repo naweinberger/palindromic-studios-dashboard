@@ -54,7 +54,7 @@ export const receiveEntry = (json) => {
 	}
 }
 
-export const receiveEntryNotFound = (json) => {
+export const receiveEntryNotFound = () => {
 	return {
 		type: RECEIVE_ENTRY_NOT_FOUND
 	}
@@ -93,19 +93,18 @@ function fetchEntry(id) {
 			}
 		})
 		.then(
-			function(response) { console.log(response); return response;},
-			error => console.log(error)
-			)
-		.then(json => {
-				try {
-					let id = json.data.id
-					dispatch(receiveEntry(json))
+			response => { 
+				console.log(response.status)
+				if (response.status == 200) {
+					dispatch(receiveEntry(response));
 				}
-				catch (e) {
-					dispatch(receiveEntryNotFound(json))
+			},
+			error => {
+				console.log(error.response.status)
+				if (error.response.status === 404) {
+					dispatch(receiveEntryNotFound())
 				}
 			}
-			
 			)
 	}
 }
