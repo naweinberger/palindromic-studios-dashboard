@@ -33,7 +33,7 @@ class EntryDetailContainer extends Component {
 					<span>Loading...</span>
 				}
 				{!loading && typeof entry == 'undefined' &&
-					<div>Entry is undefined</div>
+					<div>Sorry, this entry doesn't exist.</div>
 				}
 				{!loading && typeof entry != 'undefined' &&
 					<div>

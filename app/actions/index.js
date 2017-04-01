@@ -7,6 +7,7 @@ export const REQUEST_ENTRIES = 'REQUEST_ENTRIES'
 export const RECEIVE_ENTRIES = 'RECEIVE_ENTRIES'
 export const REQUEST_ENTRY = 'REQUEST_ENTRY'
 export const RECEIVE_ENTRY = 'RECEIVE_ENTRY'
+export const RECEIVE_ENTRY_NOT_FOUND = 'RECEIVE_ENTRY_NOT_FOUND'
 
 let nextId = 0
 export const addEntry = (food, amount) => {
@@ -53,6 +54,12 @@ export const receiveEntry = (json) => {
 	}
 }
 
+export const receiveEntryNotFound = (json) => {
+	return {
+		type: RECEIVE_ENTRY_NOT_FOUND
+	}
+}
+
 // Thunk action creator
 // Use it like any other action creator:
 // store.dispatch(fetchEntries(params))
@@ -89,8 +96,16 @@ function fetchEntry(id) {
 			function(response) { console.log(response); return response;},
 			error => console.log(error)
 			)
-		.then(json =>
-			dispatch(receiveEntry(json))
+		.then(json => {
+				try {
+					let id = json.data.id
+					dispatch(receiveEntry(json))
+				}
+				catch (e) {
+					dispatch(receiveEntryNotFound(json))
+				}
+			}
+			
 			)
 	}
 }

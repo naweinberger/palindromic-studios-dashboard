@@ -5,7 +5,8 @@ import {
 	REQUEST_ENTRIES,
 	RECEIVE_ENTRIES,
 	REQUEST_ENTRY,
-	RECEIVE_ENTRY } from '../actions'
+	RECEIVE_ENTRY,
+	RECEIVE_ENTRY_NOT_FOUND } from '../actions'
 import axios from 'axios'
 
 const initialState = {
@@ -55,6 +56,10 @@ const entryDetail = (state = initialState, action) => {
 				loadingDetail: false,
 				items: [...state.items, action.entry]
 			})
+		case RECEIVE_ENTRY_NOT_FOUND:
+			return Object.assign({}, state, {
+				loadingDetail: false
+			})
 		default:
 			return state
 	}
@@ -69,6 +74,7 @@ const entries = (state = initialState, action) => {
 			return entryList(state, action)
 		case REQUEST_ENTRY:
 		case RECEIVE_ENTRY:
+		case RECEIVE_ENTRY_NOT_FOUND:
 			return entryDetail(state, action)
 		default:
 			return state
