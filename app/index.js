@@ -20,8 +20,6 @@ let store = createStore(
 
 let unsubscribe = store.subscribe(() => console.log(store.getState()))
 
-const Entry = ({match}) => <h1>{store.getState().entries.items.filter( (entry) => entry.id == match.params.id).map( (entry) => entry.food.name)}</h1>
-
 const routes = [
 	{path: '/', text: 'Home', showIndex: true, exact: true,  main: EntryListContainer},
 	{path: '/entry/:id', showIndex: false, main: EntryDetailContainer}

@@ -2,9 +2,10 @@
   "name": "react-hello-world",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server",
     "dev": "webpack --config webpack.config.dev.js && webpack-dev-server -d --config webpack.config.dev.js --content-base dist/ --progress --colors",
     "prod": "webpack --config webpack.config.js -p && webpack-dev-server --config webpack.config.js --content-base prod/ --progress --colors"
   },
