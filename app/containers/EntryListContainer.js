@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { addEntry, deleteEntry, fetchEntries } from '../actions'
+import { addEntry, deleteEntry, fetchEntries, setSelectedEntry } from '../actions'
 import { EntryList } from '../components/EntryList'
+import _ from 'lodash'
 
 // Perhaps add getEntries = (date/criteria)
 
@@ -16,13 +17,13 @@ const mapDispatchToProps = (dispatch) => {
 		fetchEntries: () => {
 			dispatch(fetchEntries())
 		},
-		onEntryClick: (id) => {
-			dispatch(deleteEntry(id))
+		onEntryClick: (entry) => {
+			
 		}
 	}
 }
 
-class EntryContainer extends Component {
+class EntryListContainer extends Component {
 	componentDidMount() {
 		this.props.fetchEntries();
 	}
@@ -38,4 +39,4 @@ class EntryContainer extends Component {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(EntryContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(EntryListContainer)

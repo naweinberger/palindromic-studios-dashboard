@@ -4,9 +4,10 @@ import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import logger from 'redux-logger'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { HashRouter as Router, Route, Link } from 'react-router-dom'
 import healthApp from './reducers'
-import EntryContainer from './containers/EntryContainer'
+import EntryListContainer from './containers/EntryListContainer'
+import EntryDetailContainer from './containers/EntryDetailContainer'
 import { addEntry, deleteEntry } from './actions'
 
 let store = createStore(
@@ -19,11 +20,11 @@ let store = createStore(
 
 let unsubscribe = store.subscribe(() => console.log(store.getState()))
 
-const Test = () => <h1>Test</h1>
+const Entry = ({match}) => <h1>{store.getState().entries.items.filter( (entry) => entry.id == match.params.id).map( (entry) => entry.food.name)}</h1>
 
 const routes = [
-	{path: '/', text: 'Home', exact: true,  div1: EntryContainer, div2: Test},
-	{path: '/b', text: 'B', div1: Test, div2: EntryContainer}
+	{path: '/', text: 'Home', showIndex: true, exact: true,  main: EntryListContainer},
+	{path: '/entry/:id', showIndex: false, main: EntryDetailContainer}
 ]
 
 
@@ -32,9 +33,9 @@ class App extends Component {
 		return (
 			<Router>
 				<div>
-					{routes.map( (route, index) => <li key={index}><Link to={route.path}>{route.text}</Link></li>)}
+					{routes.filter( (route) => route.showIndex == true ).map( (route, index) => <li key={index}><Link to={route.path}>{route.text}</Link></li>)}
 					<div>
-						{routes.map( (route, index) => <Route key={index} path={route.path} exact={route.exact} component={route.div1} />)}
+						{routes.map( (route, index) => <Route key={index} path={route.path} exact={route.exact} component={route.main} />)}
 					</div>
 					
 					{/* Ex: sidebar, main
@@ -53,7 +54,7 @@ class App extends Component {
 
 ReactDOM.render(
 	<Provider store={store}>
-		<EntryContainer />
+		<App />
 	</Provider>,
 	document.getElementById('app')
 );

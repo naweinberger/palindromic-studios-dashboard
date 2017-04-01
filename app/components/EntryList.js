@@ -1,7 +1,7 @@
-import React from 'react';
-import { Entry } from './Entry'
+import React, { Component } from 'react';
+import { EntryItem } from './EntryItem'
 
-export class EntryList extends React.Component {
+export class EntryList extends Component {
 	onEntryClick(id) {
 		return this.props.onEntryClick(id)
 	}
@@ -9,11 +9,10 @@ export class EntryList extends React.Component {
 		let onEntryClick = this.props.onEntryClick
 		let entries = this.props.entries.map(function(entry) {
 			return(
-			<Entry
+			<EntryItem
 				key={entry.id}
-				food={entry.food}
-				amount={entry.amount}
-				onEntryClick={() => onEntryClick(entry.id)}
+				entry={entry}
+				onEntryClick={() => onEntryClick(entry)}
 			/>)
 			}
 		);

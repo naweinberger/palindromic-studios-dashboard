@@ -1,13 +1,22 @@
-import { ADD_ENTRY, DELETE_ENTRY, UPDATE_ENTRY, REQUEST_ENTRIES, RECEIVE_ENTRIES } from '../actions'
+import { 
+	ADD_ENTRY,
+	DELETE_ENTRY,
+	UPDATE_ENTRY,
+	REQUEST_ENTRIES,
+	RECEIVE_ENTRIES,
+	REQUEST_ENTRY,
+	RECEIVE_ENTRY } from '../actions'
 import axios from 'axios'
 
 const initialState = {
 	isFetching: false,
 	didInvalidate: false,
-	items: []
+	items: [],
+	loadingDetail: false
 }
 
-const entries = (state = initialState, action) => {
+// Entry list view case
+const entryList = (state = initialState, action) => {
 	switch (action.type) {
 		case ADD_ENTRY:
 			return Object.assign({}, state, {
@@ -29,6 +38,38 @@ const entries = (state = initialState, action) => {
 				items: action.entries,
 				lastUpdated: action.receivedAt
 			})
+		default:
+			return state
+	}
+}
+
+// Entry detail view cases
+const entryDetail = (state = initialState, action) => {
+	switch (action.type) {
+		case REQUEST_ENTRY:
+			return Object.assign({}, state, {
+				loadingDetail: true
+			})
+		case RECEIVE_ENTRY:
+			return Object.assign({}, state, {
+				loadingDetail: false,
+				items: [...state.items, action.entry]
+			})
+		default:
+			return state
+	}
+}
+
+const entries = (state = initialState, action) => {
+	switch (action.type) {
+		case ADD_ENTRY:
+		case DELETE_ENTRY:
+		case REQUEST_ENTRIES:
+		case RECEIVE_ENTRIES:
+			return entryList(state, action)
+		case REQUEST_ENTRY:
+		case RECEIVE_ENTRY:
+			return entryDetail(state, action)
 		default:
 			return state
 	}
