@@ -18,7 +18,7 @@ let store = createStore(
 		)
 	)
 
-let unsubscribe = store.subscribe(() => console.log(store.getState()))
+// let unsubscribe = store.subscribe(() => console.log(store.getState()))
 
 const routes = [
 	{path: '/', text: 'Home', showIndex: true, exact: true,  main: EntryListContainer},

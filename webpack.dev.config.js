@@ -1,5 +1,5 @@
 var path = require('path');
-
+var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 	template: path.resolve(__dirname, 'app/index.html'),
@@ -10,6 +10,7 @@ var HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 
 module.exports = {
 	entry: [
+		'webpack-hot-middleware/client',
 		'./app/index.js'
 	],
 	module: {
@@ -22,5 +23,9 @@ module.exports = {
 		path: path.resolve(__dirname, 'dist'),
 		publicPath: '/dist'
 	},
-	plugins: [HtmlWebpackPluginConfig]
+	plugins: [
+		HtmlWebpackPluginConfig,
+		new webpack.HotModuleReplacementPlugin(),
+		new webpack.NoEmitOnErrorsPlugin()
+	]
 }
