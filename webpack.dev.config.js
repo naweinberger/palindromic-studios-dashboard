@@ -10,7 +10,7 @@ var HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 
 module.exports = {
 	entry: [
-		'webpack-hot-middleware/client',
+		'webpack-hot-middleware/client?reload=true',
 		'./app/index.js'
 	],
 	module: {
