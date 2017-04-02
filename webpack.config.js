@@ -1,5 +1,5 @@
 var WebpackStripLoader = require('strip-loader');
-var devConfig = require('./webpack.config.dev.js');
+var devConfig = require('./webpack.dev.config.js');
 var webpack = require('webpack')
 
 var stripLoader = {
@@ -9,6 +9,10 @@ var stripLoader = {
 }
 
 devConfig.module.loaders.push(stripLoader);
+devConfig.entry = [
+		'./app/index.js'
+	]
+devConfig.plugins.splice(1, 2)
 devConfig.plugins.push(new webpack.DefinePlugin({
 	'process.env': {
 		'NODE_ENV': JSON.stringify('production')

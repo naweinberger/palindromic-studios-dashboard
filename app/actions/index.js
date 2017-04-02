@@ -94,7 +94,6 @@ function fetchEntry(id) {
 		})
 		.then(
 			response => { 
-				console.log(response.status)
 				if (response.status == 200) {
 					dispatch(receiveEntry(response));
 				}
