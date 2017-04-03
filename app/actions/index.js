@@ -1,4 +1,4 @@
-import axios from 'axios'
+import { fetchEntries, fetchEntry, requestAddEntry } from './api'
 
 export const ADD_ENTRY = 'ADD_ENTRY'
 export const DELETE_ENTRY = 'DELETE_ENTRY'
@@ -10,12 +10,15 @@ export const RECEIVE_ENTRY = 'RECEIVE_ENTRY'
 export const RECEIVE_ENTRY_NOT_FOUND = 'RECEIVE_ENTRY_NOT_FOUND'
 
 let nextId = 0
-export const addEntry = (food, amount) => {
+
+
+export const addEntry = (food, amount, date) => {
 	return {
 		type: ADD_ENTRY,
 		id: nextId++,
 		food,
-		amount
+		amount,
+		date
 	}
 }
 
@@ -60,69 +63,18 @@ export const receiveEntryNotFound = () => {
 	}
 }
 
-// Thunk action creator
-// Use it like any other action creator:
-// store.dispatch(fetchEntries(params))
-
-export function fetchEntries() {
-	return (dispatch) => {
-		dispatch(requestEntries)
-		return axios.get('http://api.palindromicstudios.com/health/entry/', {
-			auth: {
-				username: 'natan',
-				password: 'phillies'
-			}
-		})
-		.then(
-			response => response,
-			error => console.log(error)
-			)
-		.then(json =>
-			dispatch(receiveEntries(json))
-			)
+export const REQUEST_FOODS = 'REQUEST_FOODS'
+export const requestFoods = () => {
+	return {
+		type: REQUEST_FOODS
 	}
 }
 
-function fetchEntry(id) {
-	return (dispatch) => {
-		dispatch(requestEntry(id))
-		return axios.get(`http://api.palindromicstudios.com/health/entry/${id}/`, {
-			auth: {
-				username: 'natan',
-				password: 'phillies'
-			}
-		})
-		.then(
-			response => { 
-				if (response.status == 200) {
-					dispatch(receiveEntry(response));
-				}
-			},
-			error => {
-				console.log(error.response.status)
-				if (error.response.status === 404) {
-					dispatch(receiveEntryNotFound())
-				}
-			}
-			)
+export const RECEIVE_FOODS = 'RECEIVE_FOODS'
+export const receiveFoods = (json) => {
+	return {
+		type: RECEIVE_FOODS,
+		foods: json.data.results
 	}
 }
 
-function shouldFetchEntry(state, id) {
-	const entry = state.entries.items.filter( (entry) => entry.id == id )
-	if (entry.length == 0) {
-		return true
-	}
-	return false
-}
-
-export function fetchEntryIfNeeded(id) {
-	console.log('Calling fetchEntryIfNeeded')
-	return (dispatch, getState) => {
-		if (shouldFetchEntry(getState(), id)) {
-			console.log('Fetching entry...')
-			return dispatch(fetchEntry(id))
-		}
-		console.log('Did not need to fetch entry')
-	}
-}

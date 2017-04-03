@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import EntryDetail from '../components/EntryDetail'
-import { fetchEntryIfNeeded } from '../actions'
+import { fetchEntryIfNeeded } from '../actions/api'
 import _ from 'lodash'
 
 const mapStateToProps = (state) => {

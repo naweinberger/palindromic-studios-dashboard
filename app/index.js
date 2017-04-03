@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import healthApp from './reducers'
 import EntryListContainer from './containers/EntryListContainer'
 import EntryDetailContainer from './containers/EntryDetailContainer'
+import EntryInputContainer from './containers/EntryInputContainer'
 import { addEntry, deleteEntry } from './actions'
 
 let store = createStore(
@@ -34,6 +35,10 @@ class App extends Component {
 					{routes.filter( (route) => route.showIndex == true ).map( (route, index) => <li key={index}><Link to={route.path}>{route.text}</Link></li>)}
 					<div>
 						{routes.map( (route, index) => <Route key={index} path={route.path} exact={route.exact} component={route.main} />)}
+					</div>
+					
+					{/*<div>
+						{routes.map( (route, index) => <Route key={index} path={route.path} exact={route.exact} component={route.sidebar} />)}
 					</div>
 					
 					{/* Ex: sidebar, main

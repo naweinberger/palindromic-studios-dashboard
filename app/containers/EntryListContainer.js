@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { addEntry, deleteEntry, fetchEntries, setSelectedEntry } from '../actions'
+import { addEntry, deleteEntry } from '../actions'
+import { fetchEntries } from '../actions/api'
 import { EntryList } from '../components/EntryList'
 import _ from 'lodash'
 

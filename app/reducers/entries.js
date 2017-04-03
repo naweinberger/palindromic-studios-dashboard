@@ -7,7 +7,6 @@ import {
 	REQUEST_ENTRY,
 	RECEIVE_ENTRY,
 	RECEIVE_ENTRY_NOT_FOUND } from '../actions'
-import axios from 'axios'
 
 const initialState = {
 	isFetching: false,
@@ -16,12 +15,12 @@ const initialState = {
 	loadingDetail: false
 }
 
-// Entry list view case
+// Entry list view cases
 const entryList = (state = initialState, action) => {
 	switch (action.type) {
 		case ADD_ENTRY:
 			return Object.assign({}, state, {
-				items: [...state.items, {id: action.id, food: action.food, amount: action.amount}]
+				items: [...state.items, {id: action.id, food: action.food, amount: action.amount, date: action.date}]
 			})
 		case DELETE_ENTRY:
 			return Object.assign({}, state, {
