@@ -27,8 +27,8 @@ let store = createStore(
 // let unsubscribe = store.subscribe(() => console.log(store.getState()))
 
 const routes = [
-	{path: '/', text: 'Home', showIndex: true, exact: true,  main: DashboardContainer, header: () => <Header links={routes} current="Home"/>},
-	{path: '/a', text: 'Somewhere else', showIndex: true, exact: true,  main: DashboardContainer, header: () => <Header links={routes} current="Somewhere else" />},
+	{path: '/', text: 'Home', showIndex: true, exact: true,  main: DashboardContainer, header: () => <Header links={routes} current={0}/>},
+	{path: '/a', text: 'Somewhere else', showIndex: true, exact: true,  main: DashboardContainer, header: () => <Header links={routes} current={1} />},
 	{path: '/entry/:id', showIndex: false, main: EntryDetailContainer}
 ]
 
@@ -38,7 +38,9 @@ class App extends Component {
 			<MuiThemeProvider>
 				<Router>
 					<div>
+						<div>
 						{routes.map( (route, index) => <Route key={index} path={route.path} exact={route.exact} component={route.header} />)}
+						</div>
 						<div>
 							{routes.map( (route, index) => <Route key={index} path={route.path} exact={route.exact} component={route.main} />)}
 						</div>

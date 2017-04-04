@@ -12,7 +12,7 @@ export default class Header extends Component {
         this.state = {
             value: props.current,
         }
-        console.log(props)
+        console.log(props.current)
     }
 
     handleChange = (event, index, value) => {
