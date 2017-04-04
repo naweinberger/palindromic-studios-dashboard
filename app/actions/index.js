@@ -38,7 +38,8 @@ export const requestEntries = () => {
 export const receiveEntries = (json) => {
 	return {
 		type: RECEIVE_ENTRIES,
-		entries: json.data.results,
+		entries: json.data.entries,
+		stats: json.data.totals,
 		receivedAt: Date.now()
 	}
 }

@@ -6,7 +6,7 @@ import thunkMiddleware from 'redux-thunk'
 import logger from 'redux-logger'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import healthApp from './reducers'
-import EntryListContainer from './containers/EntryListContainer'
+import DashboardContainer from './containers/DashboardContainer'
 import EntryDetailContainer from './containers/EntryDetailContainer'
 import EntryInputContainer from './containers/EntryInputContainer'
 import { addEntry, deleteEntry } from './actions'
@@ -22,7 +22,7 @@ let store = createStore(
 // let unsubscribe = store.subscribe(() => console.log(store.getState()))
 
 const routes = [
-	{path: '/', text: 'Home', showIndex: true, exact: true,  main: EntryListContainer},
+	{path: '/', text: 'Home', showIndex: true, exact: true,  main: DashboardContainer},
 	{path: '/entry/:id', showIndex: false, main: EntryDetailContainer}
 ]
 

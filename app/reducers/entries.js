@@ -12,6 +12,7 @@ const initialState = {
 	isFetching: false,
 	didInvalidate: false,
 	items: [],
+	stats: {},
 	loadingDetail: false
 }
 
@@ -36,6 +37,7 @@ const entryList = (state = initialState, action) => {
 				isFetching: false,
 				didInvalidate: false,
 				items: action.entries,
+				stats: action.stats,
 				lastUpdated: action.receivedAt
 			})
 		default:

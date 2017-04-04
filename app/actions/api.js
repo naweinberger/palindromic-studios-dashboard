@@ -26,7 +26,7 @@ export const sendEntry = (food, amount, date) => {
 export function fetchEntries() {
     return (dispatch) => {
         dispatch(requestEntries)
-        return axios.get('http://api.palindromicstudios.com/health/entry/', {
+        return axios.get('http://api.palindromicstudios.com/health/entry/today/', {
             auth: {
                 username: 'natan',
                 password: 'phillies'
