@@ -1,16 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
+import { ListItem } from 'material-ui/List'
 
 export class EntryItem extends React.Component {
 	render() {
 		let entry = this.props.entry
 		return (
 			<Link to={`/entry/${entry.id}`}>
-				<li onClick={this.props.onEntryClick}>
-					<h3>{entry.food.name}</h3>
-					<h4>{entry.amount} {entry.food.unit}</h4>
-					<h4>{entry.calories}</h4>
-				</li>
+				<ListItem
+					primaryText={entry.food.name}
+					secondaryText={`${entry.calories} cal`}>
+				</ListItem>
 			</Link>
 			)
 	}

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { EntryItem } from './EntryItem'
+import { List } from 'material-ui/List'
 
 export class EntryList extends Component {
 	onEntryClick(id) {
@@ -18,9 +19,9 @@ export class EntryList extends Component {
 		);
 		return (
 			<div>
-				<ul>
+				<List>
 					{entries}
-				</ul>
+				</List>
 			</div>
 			)
 	}
