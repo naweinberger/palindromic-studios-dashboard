@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { addEntry, deleteEntry } from '../actions'
-import { fetchEntries } from '../actions/api'
+import { fetchEntries, fetchFoods } from '../actions/api'
 import { EntryList } from '../components/EntryList'
 import { StatsList } from '../components/StatsList'
+import { EntryInput } from '../components/EntryInput'
 import _ from 'lodash'
 
 // Perhaps add getEntries = (date/criteria)
@@ -11,7 +12,8 @@ import _ from 'lodash'
 const mapStateToProps = (state) => {
 	return {
 		entries: state.entries.items,
-		stats: state.entries.stats
+		stats: state.entries.stats,
+		foods: state.foods.items,
 	}
 }
 
@@ -19,6 +21,9 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		fetchEntries: () => {
 			dispatch(fetchEntries())
+		},
+		fetchFoods: () => {
+			dispatch(fetchFoods())
 		},
 		onEntryClick: (entry) => {
 			
@@ -29,6 +34,7 @@ const mapDispatchToProps = (dispatch) => {
 class DashboardContainer extends Component {
 	componentDidMount() {
 		this.props.fetchEntries();
+		this.props.fetchFoods();
 	}
 
 	componentDidUpdate(lastProps) {
@@ -38,6 +44,7 @@ class DashboardContainer extends Component {
 	render() {
 		return (
 			<div>
+				<EntryInput foods={this.props.foods} />
 				<EntryList entries={this.props.entries} />
 				<StatsList stats={this.props.stats} />
 			</div>
