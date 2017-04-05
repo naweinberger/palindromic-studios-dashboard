@@ -8,7 +8,7 @@ export class EntryItem extends React.Component {
 		return (
 			<ListItem
 				primaryText={entry.food.name}
-				secondaryText={`${entry.calories} cal`}
+				secondaryText={`${Math.round(entry.calories)} cal`}
 				containerElement={<Link to={`/entry/${entry.id}`} />} />
 			)
 	}
