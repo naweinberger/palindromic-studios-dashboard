@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import EntryDetail from '../components/EntryDetail'
-import { fetchEntryIfNeeded } from '../actions'
+import { fetchEntryIfNeeded, deleteEntry } from '../actions/api'
 import _ from 'lodash'
 
 const mapStateToProps = (state) => {
@@ -11,16 +11,28 @@ const mapStateToProps = (state) => {
 	}
 }
 
+const mapDispatchToProps = (dispatch) => {
+	return {
+		fetchEntryIfNeeded: (id) => {
+			dispatch(fetchEntryIfNeeded(id))
+		},
+		deleteEntry: (id) => {
+			dispatch(deleteEntry(id))
+		}
+	}
+}
+
 class EntryDetailContainer extends Component {
 	componentDidMount() {
-		const { dispatch, match } = this.props
-		dispatch(fetchEntryIfNeeded(match.params.id))
+		console.log(this.props.match.params.id)
+		const { match } = this.props
+		this.props.fetchEntryIfNeeded(match.params.id)
 	}
 
 	componentDidUpdate(prevProps) {
 		if (this.props.match.params.id !== prevProps.match.params.id) {
-			const { dispatch, match } = this.props
-			dispatch(fetchEntryIfNeeded(match.params.id))
+			const { match } = this.props
+			this.props.fetchEntryIfNeeded(match.params.id)
 		}
 	}
 
@@ -37,6 +49,7 @@ class EntryDetailContainer extends Component {
 				}
 				{!loading && typeof entry != 'undefined' &&
 					<div>
+						<a onClick={() => this.props.deleteEntry(entry.id)} href='#'>Delete entry</a>
 						<EntryDetail entry={entry} />
 					</div>
 				}
@@ -47,4 +60,4 @@ class EntryDetailContainer extends Component {
 	}
 }
 
-export default connect(mapStateToProps)(EntryDetailContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(EntryDetailContainer)

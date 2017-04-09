@@ -1,17 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
+import { ListItem } from 'material-ui/List'
+import { Card } from 'material-ui/Card'
+import ActionDelete from 'material-ui/svg-icons/action/delete'
 
 export class EntryItem extends React.Component {
 	render() {
 		let entry = this.props.entry
 		return (
-			<Link to={`/entry/${entry.id}`}>
-				<li onClick={this.props.onEntryClick}>
-					<h3>{entry.food.name}</h3>
-					<h4>{entry.amount} {entry.food.unit}</h4>
-					<h4>{entry.calories}</h4>
-				</li>
-			</Link>
+			<Card style={{
+		      margin: 10
+		    }}>
+				<ListItem
+					primaryText={entry.food.name}
+					secondaryText={`${Math.round(entry.calories)} cal`}
+					containerElement={<Link to={`/entry/${entry.id}`} /> }
+				/>
+			</Card>
 			)
 	}
 }
