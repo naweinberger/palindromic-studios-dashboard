@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { addEntry, deleteEntry } from '../actions'
-import { fetchEntries, fetchFoods } from '../actions/api'
+import { deleteEntry } from '../actions'
+import { fetchEntries, fetchFoods, submitEntry } from '../actions/api'
 import { EntryList } from '../components/EntryList'
 import { StatsList } from '../components/StatsList'
 import { EntryInput } from '../components/EntryInput'
@@ -27,6 +27,9 @@ const mapDispatchToProps = (dispatch) => {
 		},
 		onEntryClick: (entry) => {
 			
+		},
+		submitEntry: (date, food, amount) => {
+			dispatch(submitEntry(date, food, amount))
 		}
 	}
 }
@@ -44,8 +47,8 @@ class DashboardContainer extends Component {
 	render() {
 		return (
 			<div>
-				<div style={{display: 'block'}}>
-					<EntryInput foods={this.props.foods} />
+				<div style={{display: 'block', textAlign: 'center'}}>
+					<EntryInput foods={this.props.foods} submitEntry={this.props.submitEntry} />
 				</div>
 				<div style={{width: '40%', display: 'inline-block'}}>
 					<EntryList entries={this.props.entries} />

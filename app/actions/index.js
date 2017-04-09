@@ -1,7 +1,9 @@
-import { fetchEntries, fetchEntry, requestAddEntry } from './api'
-
-export const ADD_ENTRY = 'ADD_ENTRY'
-export const DELETE_ENTRY = 'DELETE_ENTRY'
+export const SUBMITTING_ENTRY = 'SUBMITTING_ENTRY'
+export const SUBMITTING_ENTRY_SUCCEEDED = 'SUBMITTING_ENTRY_SUCCEEDED'
+export const SUBMITTING_ENTRY_FAILED = 'SUBMITTING_ENTRY_FAILED'
+export const DELETING_ENTRY = 'DELETING_ENTRY'
+export const DELETING_ENTRY_SUCCEEDED = 'DELETING_ENTRY_SUCCEEDED'
+export const DELETING_ENTRY_FAILED = 'DELETING_ENTRY_FAILED'
 export const UPDATE_ENTRY = 'UPDATE_ENTRY'
 export const REQUEST_ENTRIES = 'REQUEST_ENTRIES'
 export const RECEIVE_ENTRIES = 'RECEIVE_ENTRIES'
@@ -9,23 +11,46 @@ export const REQUEST_ENTRY = 'REQUEST_ENTRY'
 export const RECEIVE_ENTRY = 'RECEIVE_ENTRY'
 export const RECEIVE_ENTRY_NOT_FOUND = 'RECEIVE_ENTRY_NOT_FOUND'
 
-let nextId = 0
-
-
-export const addEntry = (food, amount, date) => {
+export const submittingEntry = (date, food, amount) => {
 	return {
-		type: ADD_ENTRY,
-		id: nextId++,
+		type: SUBMITTING_ENTRY,
 		food,
 		amount,
 		date
 	}
 }
 
-export const deleteEntry = (id) => {
+export const submittingEntrySucceeded = (json) => {
 	return {
-		type: DELETE_ENTRY,
+		type: SUBMITTING_ENTRY_SUCCEEDED,
+		entry: json.data
+	}
+}
+
+export const submittingEntryFailed = (error) => {
+	return {
+		type: SUBMITTING_ENTRY_FAILED,
+		message: 'An error occurred.'
+	}
+}
+
+export const deletingEntry = (id) => {
+	return {
+		type: DELETING_ENTRY,
 		id
+	}
+}
+
+export const deletingEntrySucceeded = (id) => {
+	return {
+		type: DELETING_ENTRY_SUCCEEDED,
+		id
+	}
+}
+
+export const deletingEntryFailed = () => {
+	return {
+		type: DELETING_ENTRY_FAILED,
 	}
 }
 

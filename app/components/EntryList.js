@@ -13,7 +13,6 @@ export class EntryList extends Component {
 			<EntryItem
 				key={entry.id}
 				entry={entry}
-				onEntryClick={() => onEntryClick(entry)}
 			/>)
 			}
 		);

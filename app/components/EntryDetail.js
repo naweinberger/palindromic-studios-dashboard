@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { deleteEntry } from '../actions/api'
 
 class EntryDetail extends Component {
 

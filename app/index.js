@@ -19,7 +19,7 @@ injectTapEventPlugin()
 let store = createStore(
 	healthApp,
 	applyMiddleware(
-		// logger,
+		logger,
 		thunkMiddleware
 		)
 	)
@@ -27,9 +27,8 @@ let store = createStore(
 // let unsubscribe = store.subscribe(() => console.log(store.getState()))
 
 const routes = [
-	{path: '/', text: 'Home', showIndex: true, exact: true,  main: DashboardContainer, header: () => <Header links={routes} current={0}/>},
-	{path: '/a', text: 'Somewhere else', showIndex: true, exact: true,  main: DashboardContainer, header: () => <Header links={routes} current={1} />},
-	{path: '/entry/:id', showIndex: false, main: EntryDetailContainer}
+	{path: '/', text: 'Home', showIndex: true, exact: true,  main: DashboardContainer, header: () => <Header links={routes} current={0} />},
+	{path: '/entry/:id', showIndex: false, main: EntryDetailContainer, header: () => <Header links={routes} current={0} />}
 ]
 
 class App extends Component {

@@ -1,4 +1,10 @@
 import {
+    submittingEntry,
+    submittingEntrySucceeded,
+    submittingEntryFailed,
+    deletingEntry,
+    deletingEntrySucceeded,
+    deletingEntryFailed,
     requestEntries,
     receiveEntries,
     requestEntry,
@@ -8,13 +14,47 @@ import {
     receiveFoods } from './index'
 import axios from 'axios'
 
-export const sendEntry = (food, amount, date) => {
-    axios.post('http://api.palindromicstudios.com/health/entry/', {
-        auth: {
-            username: 'natan',
-            password: 'password'
-        }
-    })
+export const submitEntry = (date, food, amount) => {
+    return (dispatch) => {
+        dispatch(submittingEntry)
+        axios({
+            method: 'post',
+            url: 'http://api.palindromicstudios.com/health/entry/',
+            auth: {
+                username: 'natan',
+                password: 'phillies'
+            },
+            data: {
+                date: date,
+                food_upload: food,
+                amount: amount
+            }
+            
+        })
+        .then(
+            response => dispatch(submittingEntrySucceeded(response)),
+            error => dispatch(submittingEntryFailed(error))
+            )
+    }
+    
+}
+
+export const deleteEntry = (id) => {
+    return (dispatch) => {
+        dispatch(deletingEntry)
+        axios({
+            method: 'delete',
+            url: `http://api.palindromicstudios.com/health/entry/${id}/`,
+            auth: {
+                username: 'natan',
+                password: 'phillies'
+            }
+        })
+        .then(
+            response => dispatch(deletingEntrySucceeded(id)),
+            error => dispatch(deletingEntryFailed())
+            )
+    }
 }
 
 // Thunk action creator
