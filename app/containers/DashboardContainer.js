@@ -44,9 +44,15 @@ class DashboardContainer extends Component {
 	render() {
 		return (
 			<div>
-				<EntryInput foods={this.props.foods} />
-				<EntryList entries={this.props.entries} />
-				<StatsList stats={this.props.stats} />
+				<div style={{display: 'block'}}>
+					<EntryInput foods={this.props.foods} />
+				</div>
+				<div style={{width: '40%', display: 'inline-block'}}>
+					<EntryList entries={this.props.entries} />
+				</div>
+				<div style={{width: '30%', verticalAlign: 'top', display: 'inline-block', textAlign: 'right', right: 0, position: 'absolute'}}>
+					<StatsList stats={this.props.stats} />
+				</div>
 			</div>
 			)
 	}
