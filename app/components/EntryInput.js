@@ -42,7 +42,7 @@ export class EntryInput extends Component {
     submitEntry = () => {
         if (
             parseInt(this.state.selectedFood) > 0 &&
-            parseInt(this.state.amount) > 0
+            parseFloat(this.state.amount) > 0
         ) {
             this.props.submitEntry(
                 this.formatDate(this.state.selectedDate),
